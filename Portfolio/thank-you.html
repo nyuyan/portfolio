@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Thank You!</title>
+    </head>
+    <body>
+        <h1>Thank You for Contacting Me!</h1>
+        <p>Here is the information you provided:</p>
+        <p><strong>First Name:</strong> <span id="firstName"></span></p>
+        <p><strong>Last Name:</strong> <span id="lastName"></span></p>
+        <p><strong>Country:</strong> <span id="country"></span></p>
+        <p><strong>Message:</strong> <span id="message"></span></p>
+
+        <script>
+            // Retrieve form data from localStorage and display it
+            document.getElementById("firstName").textContent = localStorage.getItem("firstName");
+            document.getElementById("lastName").textContent = localStorage.getItem("lastName");
+            document.getElementById("country").textContent = localStorage.getItem("country");
+            document.getElementById("message").textContent = localStorage.getItem("message");
+
+            // Clear localStorage after displaying the data
+            localStorage.clear();
+        </script>
+    </body>
+</html>
