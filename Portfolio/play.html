@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                font-family: Arial, sans-serif;
+            }
+
+            .container {
+                text-align: center;
+            }
+
+            .board {
+                display: grid;
+                grid-template-columns: repeat(3, 100px);
+                gap: 10px;
+                margin-top: 20px;
+            }
+
+            .cell {
+                width: 100px;
+                height: 100px;
+                font-size: 36px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #f0f0f0;
+                cursor: pointer;
+            }
+
+            .cell:hover {
+                background-color: #ddd;
+            }
+
+            .mode {
+                margin-bottom: 20px;
+            }
+
+        </style>
+        <title>Tic Tac Toe</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Welcome to Tic Tac Toe!</h1>
+            <div class="mode">
+                <label>Choose mode:</label>
+                <input type="radio" name="mode" value="single"> Single Player
+                <input type="radio" name="mode" value="double"> Double Player
+            </div>
+            <div class="board" id="board">
+                <!-- Game board cells will be generated here -->
+            </div>
+            <div class="message" id="message"></div>
+        </div>
+        <script>
+            const board = document.getElementById("board");
+            const message = document.getElementById("message");
+            const modeInputs = document.getElementsByName("mode");
+
+            let currentPlayer = "X";
+            let gameBoard = ["", "", "", "", "", "", "", "", ""];
+            let singlePlayerMode = true;
+            let userStartsNextRound = true;
+
+            function handleModeChange() {
+                singlePlayerMode = modeInputs[0].checked;
+                resetGame();
+            }
+
+            function resetGame() {
+                gameBoard = ["", "", "", "", "", "", "", "", ""];
+                currentPlayer = userStartsNextRound ? "X" : "O";
+                renderBoard();
+                message.textContent = `Player ${currentPlayer === "X" ? "1" : "2"}'s Turn`;
+                userStartsNextRound = !userStartsNextRound;
+                if (singlePlayerMode && currentPlayer === "O") {
+                    makeAIMove();
+                }
+            }
+
+
+            function checkWinner() {
+                const winningCombinations = [
+                    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+                    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+                    [0, 4, 8], [2, 4, 6]             // Diagonals
+                ];
+
+                for (const combination of winningCombinations) {
+                    const [a, b, c] = combination;
+                    if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+
+            function renderBoard() {
+                board.innerHTML = "";
+                gameBoard.forEach((cell, index) => {
+                    const cellElement = document.createElement("div");
+                    cellElement.classList.add("cell");
+                    cellElement.textContent = cell;
+                    cellElement.addEventListener("click", () => handleCellClick(index));
+                    board.appendChild(cellElement);
+                });
+            }
+
+            // ... (previous code)
+
+            function handleCellClick(index) {
+                if (gameBoard[index] === "" && !checkWinner()) {
+                    gameBoard[index] = currentPlayer;
+                    renderBoard();
+                    if (checkWinner()) {
+                        message.textContent = `Player ${currentPlayer} wins!`;
+                        userStartsNextRound = currentPlayer === "O";
+                        if (confirm("Player " + currentPlayer + " wins! Do you want to play again?")) {
+                            resetGame();
+                        }
+                    } else if (gameBoard.every(cell => cell !== "")) {
+                        message.textContent = "It's a draw!";
+                        userStartsNextRound = !userStartsNextRound;
+                        if (confirm("It's a draw! Do you want to play again?")) {
+                            resetGame();
+                        }
+                    } else {
+                        currentPlayer = currentPlayer === "X" ? "O" : "X";
+                        message.textContent = `Player ${currentPlayer === "X" ? "1" : "2"}'s Turn`;
+                        if (singlePlayerMode && currentPlayer === "O") {
+                            makeAIMove();
+                        }
+                    }
+                }
+            }
+
+            function makeAIMove() {
+                const emptyCells = gameBoard.reduce((acc, cell, index) => {
+                    if (cell === "") {
+                        acc.push(index);
+                    }
+                    return acc;
+                }, []);
+
+                const randomIndex = Math.floor(Math.random() * emptyCells.length);
+                const aiMove = emptyCells[randomIndex];
+                gameBoard[aiMove] = "O";
+                renderBoard();
+
+                if (checkWinner()) {
+                    message.textContent = `Player O wins!`;
+                    userStartsNextRound = false;
+                } else if (gameBoard.every(cell => cell !== "")) {
+                    message.textContent = "It's a draw!";
+                    userStartsNextRound = !userStartsNextRound; // Change starting player in case of a draw
+                } else {
+                    currentPlayer = "X";
+                    message.textContent = `Player 1's Turn`;
+                }
+            }
+
+// ... (rest of the code)
+
+
+// Add event listener for mode change
+            modeInputs.forEach(input => {
+                input.addEventListener("change", handleModeChange);
+            });
+            function resetGame() {
+                gameBoard = ["", "", "", "", "", "", "", "", ""];
+                currentPlayer = userStartsNextRound ? "X" : "O";
+                renderBoard();
+                message.textContent = `Player ${currentPlayer === "X" ? "1" : "2"}'s Turn`;
+                userStartsNextRound = !userStartsNextRound;
+                if (singlePlayerMode && currentPlayer === "O") {
+                    makeAIMove();
+                }
+            }
+
+        </script>
+    </body>
+</html>
