@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Snake Game</title>
+        <style>
+            html, body {
+                height: 100vh;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: black;
+                color: white;
+                font-family: Arial, sans-serif;
+            }
+
+            canvas {
+                border: 1px solid white;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas width="400" height="400" id="gameCanvas"></canvas>
+        <script>
+            var canvas = document.getElementById('gameCanvas');
+            var context = canvas.getContext('2d');
+
+            var boxSize = 20;
+            var score = 0;
+
+            var snake = {
+                x: boxSize * 5,
+                y: boxSize * 5,
+                dx: boxSize,
+                dy: 0,
+                cells: [],
+                maxCells: 4
+            };
+
+            var apple = {
+                x: boxSize * 10,
+                y: boxSize * 10
+            };
+
+            function getRandomPosition() {
+                return Math.floor(Math.random() * (canvas.width / boxSize)) * boxSize;
+            }
+
+            function updateSnake() {
+                snake.x += snake.dx;
+                snake.y += snake.dy;
+
+                if (snake.x >= canvas.width)
+                    snake.x = 0;
+                else if (snake.x < 0)
+                    snake.x = canvas.width - boxSize;
+
+                if (snake.y >= canvas.height)
+                    snake.y = 0;
+                else if (snake.y < 0)
+                    snake.y = canvas.height - boxSize;
+
+                snake.cells.unshift({x: snake.x, y: snake.y});
+
+                if (snake.cells.length > snake.maxCells) {
+                    snake.cells.pop();
+                }
+            }
+
+            function checkAppleCollision() {
+                if (snake.x === apple.x && snake.y === apple.y) {
+                    score++;
+                    snake.maxCells++;
+                    apple.x = getRandomPosition();
+                    apple.y = getRandomPosition();
+                }
+            }
+
+            function checkSnakeCollision() {
+                for (var i = 1; i < snake.cells.length; i++) {
+                    if (snake.x === snake.cells[i].x && snake.y === snake.cells[i].y) {
+                        snake.x = boxSize * 5;
+                        snake.y = boxSize * 5;
+                        snake.cells = [];
+                        snake.maxCells = 4;
+                        snake.dx = boxSize;
+                        snake.dy = 0;
+                        score = 0;
+                        apple.x = getRandomPosition();
+                        apple.y = getRandomPosition();
+                    }
+                }
+            }
+
+            function draw() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+
+                updateSnake();
+                checkAppleCollision();
+                checkSnakeCollision();
+
+                context.fillStyle = 'red';
+                context.fillRect(apple.x, apple.y, boxSize, boxSize);
+
+                context.fillStyle = 'green';
+                snake.cells.forEach(function (cell) {
+                    context.fillRect(cell.x, cell.y, boxSize, boxSize);
+                });
+
+                context.fillStyle = 'white';
+                context.font = '20px Arial';
+                context.fillText('Score: ' + score, 20, 30);
+            }
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowLeft' && snake.dx === 0) {
+                    snake.dx = -boxSize;
+                    snake.dy = 0;
+                } else if (e.key === 'ArrowRight' && snake.dx === 0) {
+                    snake.dx = boxSize;
+                    snake.dy = 0;
+                } else if (e.key === 'ArrowUp' && snake.dy === 0) {
+                    snake.dy = -boxSize;
+                    snake.dx = 0;
+                } else if (e.key === 'ArrowDown' && snake.dy === 0) {
+                    snake.dy = boxSize;
+                    snake.dx = 0;
+                }
+            });
+
+            function gameLoop() {
+                draw();
+                setTimeout(gameLoop, 100);
+            }
+
+            gameLoop();
+
+        </script>
+    </body>
+</html>

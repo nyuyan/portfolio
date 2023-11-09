@@ -55,7 +55,6 @@
                 <input type="radio" name="mode" value="double"> Double Player
             </div>
             <div class="board" id="board">
-                <!-- Game board cells will be generated here -->
             </div>
             <div class="message" id="message"></div>
         </div>
@@ -88,9 +87,9 @@
 
             function checkWinner() {
                 const winningCombinations = [
-                    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-                    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
-                    [0, 4, 8], [2, 4, 6]             // Diagonals
+                    [0, 1, 2], [3, 4, 5], [6, 7, 8], 
+                    [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+                    [0, 4, 8], [2, 4, 6]             
                 ];
 
                 for (const combination of winningCombinations) {
@@ -160,17 +159,13 @@
                     userStartsNextRound = false;
                 } else if (gameBoard.every(cell => cell !== "")) {
                     message.textContent = "It's a draw!";
-                    userStartsNextRound = !userStartsNextRound; // Change starting player in case of a draw
+                    userStartsNextRound = !userStartsNextRound;
                 } else {
                     currentPlayer = "X";
                     message.textContent = `Player 1's Turn`;
                 }
             }
 
-// ... (rest of the code)
-
-
-// Add event listener for mode change
             modeInputs.forEach(input => {
                 input.addEventListener("change", handleModeChange);
             });

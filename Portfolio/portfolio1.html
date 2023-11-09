@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Portfolio</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                background-color: skyblue;
+                padding: 20px;
+                font-family: Arial;
+            }
+
+            .main {
+                max-width: 1000px;
+                margin: auto;
+            }
+
+            h2 {
+                font-size: 50px;
+                word-break: break-all;
+            }
+            .navbar {
+                display: flex;
+                justify-content: flex-end;
+                overflow: hidden;
+                max-width: 100%;
+                background-color: #fff;
+                padding: 0 20px;
+                border-radius: 40px;
+                box-shadow: 0 10px 40px rgba(159, 162, 177, .8);
+            }
+
+            .navbar-item {
+                color: black;
+                padding: 20px;
+                text-decoration: none;
+                transition: .3s;
+                margin: 0 6px;
+                z-index: 1;
+                font-family: 'DM Sans', sans-serif;
+                font-weight: 500;
+                position: relative;
+            }
+
+            .navbar .navbar-item[data-active-color="orange"]:hover {
+                color: orange;
+            }
+
+            .navbar .navbar-item[data-active-color="green"]:hover {
+                color: green;
+            }
+
+            .navbar .navbar-item[data-active-color="blue"]:hover {
+                color: blue;
+            }
+
+            .navbar .navbar-item[data-active-color="red"]:hover {
+                color: red;
+            }
+            .navbar .navbar-item[data-active-color="purple"]:hover{
+                color: purple;
+            }
+
+            .navbar-indicator {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 4px;
+                transition: .4s;
+                height: 5px;
+                z-index: 1;
+                border-radius: 8px 8px 0 0;
+            }
+
+            .navbar-item:before {
+                content: "";
+                position: absolute;
+                bottom: -6px;
+                left: 0;
+                width: 100%;
+                height: 5px;
+                background-color: #dfe2ea;
+                border-radius: 8px 8px 0 0;
+                opacity: 0;
+                transition: .3s;
+            }
+
+            .navbar-item:not(.is-active):hover:before {
+                opacity: 1;
+                bottom: 0;
+            }
+
+            @media (max-width: 580px) {
+                .navbar {
+                    overflow: auto;
+                }
+            }
+            .category-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+
+            #card {
+                animation: bgAnim 60s infinite;
+                color: black;
+                padding: 20px;
+                width: 40%;
+                margin-bottom: 30px; 
+                position: relative;
+                background-size: cover;
+                box-shadow: 0px 45px 100px rgba(0, 0, 0, 0.8), inset 0 0 0 1000px rgba(192, 192, 192, 0.7);
+            }
+
+
+
+            @keyframes bgAnim {
+                0% {
+                    background-size: 100%;
+                }
+
+                50% {
+                    background-size: 250%;
+                }
+
+                100% {
+                    background-size: 100%;
+                }
+            }
+
+            .text-block {
+                text-shadow: 0px 3px 10px rgba(0, 0, 0, 0.7);
+            }
+
+            .text-block h1 {
+                font-family: "Rubik", sans-serif;
+                font-size: 3em;
+                margin: 0;
+                text-transform: uppercase;
+                font-weight: 700;
+            }
+
+            .text-block h1 small {
+                font-size: 0.4em;
+                color: #ccc;
+                position: relative;
+                bottom: 10px;
+            }
+
+            .text-block h3 {
+                margin: 0;
+                font-weight: 700;
+            }
+
+            .text-block p {
+                font-weight: 300;
+                width: 60%;
+            }
+
+            button {
+                transition: all 0.35s cubic-bezier(0.37, 0.26, 0.35, 4);
+                border: 4px solid black;
+                padding: 10px;
+                background: transparent;
+                font-family: "Rubik", sans-serif;
+                text-transform: uppercase;
+                font-weight: 700;
+                cursor: pointer;
+                color: black;
+            }
+
+            button:hover {
+                background: skyblue;
+            }
+
+            .pg {
+                position: relative;
+                width: 45%;
+            }
+
+            .pg img {
+                width: 100%;
+                height: auto;
+            }
+            .btn {
+                border: none;
+                outline: none;
+                padding: 12px 16px;
+                background-color: darkcyan;
+                cursor: pointer;
+            }
+
+            .btn:hover {
+                background-color: skyblue;
+            }
+
+            .btn.active {
+                background-color: #fff;
+                color: black;
+            }
+            .contact-header {
+                text-align: left;
+                padding: 0px 0;
+            }
+
+            .portfolio-line {
+                border-top: 2px solid black;
+                margin-bottom: 10px;
+                margin-top: -50px;
+            }
+
+            .portfolio-buttons {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            .portfolio-buttons .btn {
+                margin: 0 10px;
+            }
+            .video-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                z-index: -1;
+            }
+
+            video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .logo{
+                margin-right: 900px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="video-container">
+            <video autoplay muted loop>
+                <source src="video/sky4.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="image/updatedlogo.png" height="50px"  width="50px" alt="Logo">
+            </div>
+            <a href="index2.html" class="navbar-item" data-active-color="orange">Home</a>
+            <a href="about.html" class="navbar-item" data-active-color="green">About</a>
+            <a href="portfolio1.html" class="navbar-item is-active" data-active-color="blue">Projects</a>
+            <a href="contact.html" class="navbar-item" data-active-color="red">Contact</a>
+            <a href="play3.html" class="navbar-item" data-active-color="purple">Play</a>
+            <span class="navbar-indicator"></span>
+        </nav>
+
+        <div class="portfolio-header">
+            <h2>MY PORTFOLIO</h2>
+        </div>
+        <div class="portfolio-line"></div>
+        <div class="portfolio-buttons">
+            <button class="btn" onclick="showAll()">Show All</button>
+            <button class="btn" onclick="showCategory('app-application')">App Application</button>
+            <button class="btn" onclick="showCategory('web-application')">Web Application</button>
+            <button class="btn" onclick="showCategory('sketch-vr')">Sketch/VR Application</button>
+        </div>
+
+        <div id="app-application" class="category-container">
+            <div id="card" style="background-image: url('image/scoot.jpg');">
+                <div class="shine"></div>
+                <div class="text-block">
+                    <h1>Scoot Travel <small>Personal</small></h1>
+                    <h3>Mobile App Development</h3>
+                    <p>This is an app for travelers who take flights under Scoot Airlines.</p>
+                    <a href="project1.html">
+                        <button>Click Here To Know More</button>
+                    </a>
+                </div>
+            </div>
+            <div id="" style="background-image: #;">
+                <div class=""></div>
+                <div class="">
+                    <h1><br><small></small></h1>
+                    <h3></h3>
+                    <p></p>
+                    <a href="#">
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+           
+
+            <div id="" style="background-image: #;">
+                <div class=""></div>
+                <div class="">
+                    <h1><br><small></small></h1>
+                    <h3></h3>
+                    <p></p>
+                    <a href="#">
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="web-application" class="category-container">
+            <div id="card" style="background-image: url('image/app.png');">
+                <div class="shine"></div>
+                <div class="text-block">
+                    <h1>ProPay <br><small>Personal</small></h1>
+                    <h3>Web Development</h3>
+                    <p>This is an app for user who want to learn online payment</p>
+                    <a href="project2.html">
+                        <button>Click Here To Know More</button>
+                    </a>
+                </div>
+            </div>
+            <div id="" style="background-image: #;">
+                <div class=""></div>
+                <div class="">
+                    <h1><br><small></small></h1>
+                    <h3></h3>
+                    <p></p>
+                    <a href="#">
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="sketch-vr" class="category-container">
+            <div id="card" style="background-image: url('image/name.jpg');">
+                <div class="shine"></div>
+                <div class="text-block">
+                    <h1>Name Card<br><small>Personal</small></h1>
+                    <h3>Illustrator</h3>
+                    <p>This is an self design namecard to represent myself as a graphic designer.</p>
+                    <a href="project10.html">
+                        <button>Click Here To Know More</button>
+                    </a>
+                </div>
+            </div>
+            <script>
+                function showAll() {
+                    currentCategory = "all";
+
+                    document.querySelectorAll('.category-container').forEach(function (container) {
+                        container.style.display = 'flex';
+                        container.querySelectorAll('#card').forEach(function (card) {
+                            card.style.width = '30%'; 
+                        });
+                    });
+                }
+
+                function showCategory(category) {
+                    currentCategory = category;
+
+
+                    document.querySelectorAll('.category-container').forEach(function (container) {
+                        container.style.display = 'none';
+                    });
+
+                    document.getElementById(category).style.display = 'flex';
+                    document.getElementById(category).querySelectorAll('#card').forEach(function (card) {
+                        card.style.width = '30%'; 
+                    });
+                }
+
+
+            </script>
+    </body>
+</html>

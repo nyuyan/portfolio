@@ -17,47 +17,95 @@
                 max-width: 1000px;
                 margin: auto;
             }
-
             .navbar {
+                display: flex;
+                justify-content: flex-end;
                 overflow: hidden;
-                background-color: steelblue;
-                height: 80px; /* Set the height of the navigation bar */
+                max-width: 100%;
+                background-color: #fff;
+                padding: 0 20px;
+                border-radius: 40px;
+                box-shadow: 0 10px 40px rgba(159, 162, 177, .8);
             }
 
-            .navbar .logo {
-                float: left;
-                padding: 15px;
-            }
-
-            .navbar .navbar-right {
-                float: right;
-                line-height: 80px; /* Vertically center the text within the taller navigation bar */
-            }
-
-            .navbar a {
-                display: inline-block;
-                color: #f2f2f2;
-                text-align: center;
-                padding: 0 20px; /* Add padding to the navigation links */
+            .navbar-item {
+                color: #83818c;
+                padding: 20px;
                 text-decoration: none;
+                transition: .3s;
+                margin: 0 6px;
+                z-index: 1;
+                font-family: 'DM Sans', sans-serif;
+                font-weight: 500;
+                position: relative;
             }
 
-            .navbar a:hover {
-                background-color: #ddd;
-                color: black;
+            .navbar .navbar-item[data-active-color="orange"]:hover {
+                color: orange;
             }
-            #contact-info {
-                text-align: left;
-                padding-right: 20px; /* Add some right padding for spacing */
+
+            .navbar .navbar-item[data-active-color="green"]:hover {
+                color: green;
+            }
+
+            .navbar .navbar-item[data-active-color="blue"]:hover {
+                color: blue;
+            }
+
+            .navbar .navbar-item[data-active-color="red"]:hover {
+                color: red;
+            }
+            .navbar .navbar-item[data-active-color="purple"]:hover{
+                color: purple;
+            }
+
+            .navbar-indicator {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 4px;
+                transition: .4s;
+                height: 5px;
+                z-index: 1;
+                border-radius: 8px 8px 0 0;
+            }
+
+            .navbar-item:before {
+                content: "";
+                position: absolute;
+                bottom: -6px;
+                left: 0;
+                width: 100%;
+                height: 5px;
+                background-color: #dfe2ea;
+                border-radius: 8px 8px 0 0;
+                opacity: 0;
+                transition: .3s;
+            }
+
+            .navbar-item:not(.is-active):hover:before {
+                opacity: 1;
+                bottom: 0;
+            }
+
+            @media (max-width: 580px) {
+                .navbar {
+                    overflow: auto;
+                }
             }
             .columns-container {
-                max-width: 1800px; /* Set your desired maximum width */
+                background-color: rgba(173, 216, 230, 0.5);
+                max-width: 1800px;
                 margin: 0 auto;
-                background-color: aliceblue;
+                background-size: cover;
+                padding: 20px;
+                border-radius: 20px;
+                box-shadow: 0 10px 40px rgba(159, 162, 177, .8);
             }
 
-            /* Style inputs */
-            input[type=text], select, textarea {
+            input[type=text],
+            select,
+            textarea {
                 width: 100%;
                 padding: 12px;
                 margin-top: 6px;
@@ -71,8 +119,8 @@
                 padding: 12px 20px;
                 border: none;
                 cursor: pointer;
+                border-radius: 8px;
             }
-
 
             input[type=submit]:hover {
                 background-color: #45a049;
@@ -83,8 +131,9 @@
                 width: 50%;
                 margin-top: 6px;
                 padding: 20px;
-                box-sizing: border-box; /* Include padding in the element's total width */
+                box-sizing: border-box;
             }
+
             .content {
                 float: right;
                 width: 80%;
@@ -92,25 +141,18 @@
                 padding: 10px;
             }
 
-            /* Clear floats after the columns */
             .row:after {
                 content: "";
                 display: table;
                 clear: both;
             }
 
-            /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
             @media screen and (max-width: 600px) {
-                .column, input[type=submit] {
+                .column,
+                input[type=submit] {
                     width: 100%;
                     margin-top: 0;
                 }
-            }
-            .columnn {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh; /* This ensures the content is centered vertically */
             }
 
             .thank-you-message {
@@ -120,20 +162,74 @@
                 text-align: center;
                 display: none;
             }
+
+            .social-icons {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .social-icons a {
+                margin: 0 10px;
+                border-radius: 10%;
+                box-sizing: border-box;
+                background: rgba(255, 255, 255, 0.8);
+                width: 100px;
+                height: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                transition: 0.5s;
+                color: var(--color);
+                font-size: 2.5em;
+                -webkit-box-reflect: below 2px linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+            }
+
+            .social-icons a:hover {
+                background: var(--color);
+                color: #050801;
+                box-shadow: 0 0 5px var(--color), 0 0 25px var(--color), 0 0 50px var(--color), 0 0 200px var(--color);
+            }
+            .video-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                z-index: -1;
+            }
+
+            video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .logo{
+                margin-right: 900px;
+            }
         </style>
     </head>
     <body>
-        <div class="navbar">
-            <div class="logo">
-                <img src="path/to/your/logo.png" alt="Logo">
-            </div>
-            <div class="navbar-right">
-                <a href="#home">Home</a>
-                <a href="#projects">Projects</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </div>
+        <div class="video-container">
+            <video autoplay muted loop>
+                <source src="video/sky2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="image/updatedlogo.png" height="50px"  width="50px" alt="Logo">
+            </div>
+            <a href="index2.html" class="navbar-item" data-active-color="orange">Home</a>
+            <a href="about.html" class="navbar-item" data-active-color="green">About</a>
+            <a href="portfolio1.html" class="navbar-item" data-active-color="blue">Projects</a>
+            <a href="contact.html" class="navbar-item is-active" data-active-color="red">Contact</a>
+            <a href="play3.html" class="navbar-item" data-active-color="purple">Play</a>
+            <span class="navbar-indicator"></span>
+        </nav>
+
+
         <div id="contact-info">
             <h2>Contact Me</h2>
             <p>Let's Create Something New, leave me a message:</p>
@@ -141,7 +237,6 @@
         <div class="columns-container">
             <div class="row">
                 <div class="column">
-                    <!-- Form for user input -->
                     <form action="process-form.php" id="contact-form" method="post">
                         <label for="fname">First Name</label>
                         <input type="text" id="fname" name="firstname" placeholder="Your name..">
@@ -155,28 +250,41 @@
                         </select>
                         <label for="subject">Message</label>
                         <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
-                        <input type="submit" value="Submit">
-                    </form>
+                        <form action="process-form.php" id="contact-form" method="post">
+                            <input type="hidden" name="recipient_email" value="your-email@example.com">
+                            <input type="submit" value="Submit">
+                        </form>
                 </div>
                 <div class="column">
                     <div class="content">
                         <h2>Contact Information</h2>
                         <p><i class="fas fa-envelope"></i> Email: ngyuyan2005@gmail.com</p>
                         <p><i class="fas fa-phone"></i> Phone: +65 81281312</p>
-                        <p><i class="fas fa-map-marker-alt"></i> Address: Bedok North Blk 43, #14-198. S198303, Singapore</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Address: Bedok North Blk 43, #14-198. S198303, Singapore</p><br>
                         <h2>Socials</h2>
-                        <p><i class="fab fa-tiktok"></i> TikTok</p>
-                        <p><i class="fab fa-linkedin"></i> Linkedin</p>
-                        <p><i class="fab fa-instagram"></i> Instagram</p>
-
-
+                        <div class="social-icons">
+                            <a href="#" style="--color: #0072b1">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" style="--color: #E1306C">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" style="--color: #FF0050">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="#" style="--color: #4267B2">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" style="--color: #0072b1">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="column">
-            <!-- Thank you message container -->
             <div class="thank-you-message">
                 <h2>Thank You for Contacting Me!</h2>
                 <p><strong>First Name:</strong> <span id="thank-you-fname"></span></p>
@@ -186,23 +294,22 @@
             </div>
         </div>
 
+
         <script>
             document.getElementById('contact-form').addEventListener('submit', function (event) {
                 event.preventDefault();
 
-                // Get form values
+
                 var firstName = document.getElementById('fname').value;
                 var lastName = document.getElementById('lname').value;
                 var country = document.getElementById('country').value;
                 var message = document.getElementById('subject').value;
 
-                // Store form values in localStorage for retrieval on the thank you page
                 localStorage.setItem('firstName', firstName);
                 localStorage.setItem('lastName', lastName);
                 localStorage.setItem('country', country);
                 localStorage.setItem('message', message);
 
-                // Redirect to the thank you page
                 window.location.href = 'thank-you.html';
             });
         </script>

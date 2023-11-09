@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Timeline</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background: #f7f7f7;
+                font-family: 'Poppins', sans-serif;
+                transition: all 0.3s ease;
+            }
+
+            .event {
+                position: relative;
+                margin-bottom: 50px;
+                display: flex;
+                align-items: flex-start;
+                transition: all 0.3s ease;
+            }
+
+            .event:hover {
+                transform: scale(1.05);
+            }
+
+            .event .circle,
+            .event .time,
+            .event .content {
+                transition: all 0.3s ease;
+            }
+
+            .event:hover .circle {
+                transform: scale(1.2);
+            }
+
+            .event:hover .time {
+                transform: scale(1.2);
+            }
+
+            .event:hover .content {
+                transform: scale(1.1);
+            }
+
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 50px 20px;
+                margin-left: 50px;
+            }
+
+            .timeline {
+                position: relative;
+                margin-top: 50px;
+                margin-right: 350px;
+            }
+
+            .timeline:before {
+                content: '';
+                position: absolute;
+                left: 50%;
+                top: 0;
+                width: 2px;
+                height: 100%;
+                background: #3498db;
+                transform: translateX(-50%);
+            }
+
+            .event {
+                position: relative;
+                margin-bottom: 50px;
+                display: flex;
+                align-items: flex-start;
+            }
+
+            .event .circle {
+                width: 20px;
+                height: 20px;
+                background-color: #3498db;
+                border-radius: 50%;
+                position: absolute;
+                left: 400px;
+                top: 20px;
+                transform: translateY(-50%);
+            }
+
+            .event .content {
+                background: #3498db;
+                color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                margin-left: 60px;
+                position: relative;
+                margin-right:50px;
+                margin-bottom: 20px;
+            }
+
+            .event .time {
+                background: #3498db;
+                color: #fff;
+                padding: 10px 20px;
+                border-radius: 5px;
+                margin-left: 300px;
+                position: relative;
+                z-index: 1;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="timeline">
+                <div class="event">
+                    <div class="circle"></div>
+                    <div class="time">2012-2017</div>
+                    <div class="content">
+                        <h3>Chij Katong Primary Convent</h3>
+                        <p>Started coding and designing projects. Continued to develop skills in programming and creative
+                            design.</p>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="circle"></div>
+                    <div class="time">2018-2021</div>
+                    <div class="content">
+                        <h3>Manjusri Secondary School</h3>
+                        <p>Continued coding and design projects. Participated in various programming competitions and
+                            creative workshops.</p>
+                    </div>
+                </div>
+                <div class="event">
+                    <div class="circle"></div>
+                    <div class="time">2022-2025</div>
+                    <div class="content">
+                        <h3>Republic Polytechnic</h3>
+                        <p>Continued coding and design projects. Participated in various programming competitions and
+                            creative workshops.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

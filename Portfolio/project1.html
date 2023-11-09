@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: skyblue;
+            }
+
+            .navbar {
+                display: flex;
+                justify-content: flex-end;
+                overflow: hidden;
+                max-width: 100%;
+                background-color: #fff;
+                padding: 0 20px;
+                border-radius: 40px;
+                box-shadow: 0 10px 40px rgba(159, 162, 177, .8);
+                z-index: 2;
+                margin-top: 10px;
+            }
+
+            .navbar-item {
+                color: #83818c;
+                padding: 20px;
+                text-decoration: none;
+                transition: .3s;
+                margin: 0 6px;
+                z-index: 1;
+                font-family: 'DM Sans', sans-serif;
+                font-weight: 500;
+                position: relative;
+            }
+
+            .navbar .navbar-item[data-active-color="orange"]:hover {
+                color: orange;
+            }
+
+            .navbar .navbar-item[data-active-color="green"]:hover {
+                color: green;
+            }
+
+            .navbar .navbar-item[data-active-color="blue"]:hover {
+                color: blue;
+            }
+
+            .navbar .navbar-item[data-active-color="red"]:hover {
+                color: red;
+            }
+            .navbar .navbar-item[data-active-color="purple"]:hover{
+                color: purple;
+            }
+
+            .navbar-indicator {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 4px;
+                transition: .4s;
+                height: 5px;
+                z-index: 1;
+                border-radius: 8px 8px 0 0;
+            }
+
+            .navbar-item:before {
+                content: "";
+                position: absolute;
+                bottom: -6px;
+                left: 0;
+                width: 100%;
+                height: 5px;
+                background-color: #dfe2ea;
+                border-radius: 8px 8px 0 0;
+                opacity: 0;
+                transition: .3s;
+            }
+
+            .navbar-item:not(.is-active):hover:before {
+                opacity: 1;
+                bottom: 0;
+            }
+
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                margin-top: 5px;
+                margin-left: 20px;
+            }
+
+            .card {
+                position: relative;
+                height: 28rem;
+                width: 30rem;
+                perspective: 1000px;
+                cursor: pointer;
+                margin: 0 50px 300px;
+                transition: transform 0.5s;
+            }
+
+            .card .shadow {
+                position: absolute;
+                inset: 0;
+                box-shadow: 0 -1.5rem 2rem -0.5rem rgba(0, 0, 0, 0.7);
+                transform: translateZ(-1rem);
+                width: 100%;
+                height: 100%;
+            }
+
+            .card .shadow img {
+                width: 100%;
+                height: 100%;
+            }
+
+            .card .content {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                inset: 0;
+                padding: 3.5rem;
+                color: black;
+                text-align: center;
+                margin-bottom: -300px;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+                text-shadow: 0 0 2rem rgba(0, 0, 0, 0.5);
+            }
+
+            p {
+                font-weight: 300;
+                text-shadow: 0 0 2rem rgba(0, 0, 0, 0.5);
+            }
+
+            .card:hover {
+                transform: rotateX(calc(var(--rotateX) * 1deg)) rotateY(calc(var(--rotateY) * 1deg));
+            }
+
+            .card:hover .shadow {
+                transform: translateZ(10rem);
+            }
+
+            .card:nth-child(1) {
+                --rotateX: -20;
+                --rotateY: 20;
+            }
+
+            .card:nth-child(2) {
+                --rotateX: 20;
+                --rotateY: -20;
+            }
+
+            .card:nth-child(3) {
+                --rotateX: 20;
+                --rotateY: 20;
+            }
+            .card:nth-child(4) {
+                --rotateX: 20;
+                --rotateY: 20;
+            }
+            .card:nth-child(5) {
+                --rotateX: 20;
+                --rotateY: 20;
+            }
+            .card:nth-child(6) {
+                --rotateX: 20;
+                --rotateY: 20;
+            }
+            .card:nth-child(7) {
+                --rotateX: 20;
+                --rotateY: 20;
+            }
+            .card:nth-child(8) {
+                --rotateX: 20;
+                --rotateY: 20;
+            }
+            .card:nth-child(9) {
+                --rotateX: 20;
+                --rotateY: 20;
+            }
+            .video-container {
+                flex: 1;
+                position: relative;
+                width: 100px;
+                height: 500px;
+                background-color: black;
+                margin-top: 50px;
+                margin-bottom: 50px;
+                margin-right:  80px;
+            }
+
+
+
+            .image-container {
+                flex: 1;
+                text-align: center;
+                margin-top: 50px;
+                margin-bottom: 50px;
+            }
+
+            .flip-card {
+                width: 700px;
+                height: 500px;
+                perspective: 1000px;
+            }
+
+            .flip-card-inner {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                position: relative;
+                transform-style: preserve-3d;
+                transition: transform 0.5s;
+            }
+
+            .flip-card:hover .flip-card-inner {
+                transform: rotateY(180deg);
+            }
+
+            .flip-card-front, .flip-card-back {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                backface-visibility: hidden;
+            }
+
+            .flip-card-front {
+                background-color: skyblue;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .flip-card-back {
+                background-color: #e74c3c;
+                transform: rotateY(180deg);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                font-size: 20px;
+            }
+            .textbox {
+                width: 600px;
+                padding: 20px;
+                text-align: left;
+                border-radius: 10px;
+                font-size: 25px;
+                margin-left: -200px;
+            }
+
+            .container {
+                display: flex;
+                justify-content: space-around;
+                margin-top: 5px;
+            }
+
+            .image-container,
+            .video-container {
+                flex: 1;
+                text-align: center;
+                margin-top: 0px;
+                margin-bottom: 80px;
+            }
+
+            video {
+                width: 100%;
+                height: 100%;
+            }
+            .logo{
+                margin-right: 900px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="image/updatedlogo.png" height="50px"  width="50px" alt="Logo">
+            </div>
+            <a href="index2.html" class="navbar-item" data-active-color="orange">Home</a>
+            <a href="about.html" class="navbar-item" data-active-color="green">About</a>
+            <a href="portfolio1.html" class="navbar-item is-active" data-active-color="blue">Projects</a>
+            <a href="contact.html" class="navbar-item" data-active-color="red">Contact</a>
+            <a href="play3.html" class="navbar-item" data-active-color="purple">Play</a>
+            <span class="navbar-indicator"></span>
+        </nav>
+        <div class="container">
+            <div class="textbox">
+                <a href="portfolio1.html">
+                    <p>< BACK TO PORTFOLIO</p>
+                </a>
+                <h2>Project 1</h2>
+                <p>Hover The Image To Know More About This Project</p>
+            </div>
+            <div class="textbox">
+                <a href="project2.html">
+                    <p>Next Project ></p>
+                </a>
+                <h2>Video</h2>
+                <p>Click on the video, to view how this project work fully</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="image-container">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="image/scoot.jpg" alt="Your Image" style="max-width: 100%; max-height: 100%;">
+                        </div>
+                        <div class="flip-card-back">
+                            <h2>About Project</h2>
+                            <p><b>Project done by: Adobe XD</b><br>
+                                <b>Method: Mobile App.</b><br> ScootCart is an innovative native mobile app designed to enhance the in-flight purchasing experience for passengers and boost sales for Scoot Airlines.<br>
+                                The app addresses the challenges faced by both passengers and cabin crew members, streamlining the order-taking process and enabling real-time interaction. It features a digital F&B menu that allows passengers to explore offerings in their preferred language and provides staff with the ability to update menu items instantly. To ensure efficient communication without heavy reliance on Wi-Fi, ScootCart utilizes Bluetooth technology, allowing seamless interactions between passengers and staff. By promoting spontaneous purchases and enabling quick order fulfillment, ScootCart aims to drive higher in-flight sales, improve customer satisfaction, and enhance overall operational efficiency for Scoot Airlines.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="video-container">
+                <video autoplay muted loop>
+                    <source src="video/scoot2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="container">
+                <div class="card">
+                    <div class="shadow">
+                        <img src="image/sitemap.jpg" alt="Card 1">
+                    </div>
+                    <div class="content">
+                        <h2>Sitemap</h2>
+                        <p>We decided to create 5 sections. It include Menu, About, Contact, Information, Crew<br>
+                            under Menu will be things like food, items needed that can add to cart or get. Information will be details need<br>
+                            to know in the airplane.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="shadow">
+                        <img src="image/color.jpg" alt="Card 2">
+                    </div>
+                    <div class="content">
+                        <h2>Color Scheme</h2>
+                        <p>Scoot's UI features energetic colors (orange, yellow, and blue) reflecting their adventurous
+                            brand. Design principles of balance, unity, proximity, and emphasis create a cohesive, engaging,
+                            and intuitive interface, enhancing the in-flight shopping experience.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="shadow">
+                        <img src="image/font.jpg" alt="Card 3">
+                    </div>
+                    <div class="content">
+                        <h2>Typography</h2>
+                        <p>Scoot uses bold, playful fonts like Boogaloo for headings and Roboto for body text, reflecting
+                            their energetic brand. Clear visual hierarchy guides passengers through seamless ordering, 
+                            ensuring easy comprehension and enhancing the purchasing process.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="shadow">
+                        <img src="image/nav.jpg" alt="Card 3">
+                    </div>
+                    <div class="content">
+                        <h2>Hamburger Navigation</h2>
+                        <p>Hamburger navigation saves screen space, offering a clean and intuitive interface. Users
+                            can access menu options easily with a single tap, ensuring a seamless and clutter-free mobile app experience.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="shadow">
+                        <img src="image/nav1.jpg" alt="Card 3">
+                    </div>
+                    <div class="content">
+                        <h2>Bottom Navigation</h2>
+                        <p>This is stagnent navigation, so no matter the user scroll around, it will still be visible for the user
+                            to use it. This is another navigation needed , so user can easily interact with it.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="shadow">
+                        <img src="image/sc1.jpg" alt="Card 3">
+                    </div>
+                    <div class="content">
+                        <h2>Cart</h2>
+                        <p>Able to add to cart and directly get the item/food.
+                            Able to select their own flight too. Able to order via online, can pay online too.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="shadow">
+                        <img src="image/sc2.jpg" alt="Card 3">
+                    </div>
+                    <div class="content">
+                        <h2>Login/SignUp</h2>
+                        <p>User have to sign up and login. To make sure everyone who are access to this app is in the plane.
+                            Is also to know which user from which seat order food or item.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="shadow">
+                        <img src="image/info.jpg" alt="Card 3">
+                    </div>
+                    <div class="content">
+                        <h2>Safety Measures</h2>
+                        <p>User get to know the different informations needed in the app. Safety measurement all is in there.
+                            They even get to know their specific time remainding before reaching destination.
+                            Information for inflight, preflight and even tell you what user can do next time before flight.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="shadow">
+                        <img src="image/feed.jpg" alt="Card 3">
+                    </div>
+                    <div class="content">
+                        <h2>Contact </h2>
+                        <p>User get to contact our crew member under 2 categories, They get to contact crew for questions about their food or item order
+                            Second option, will be just to contact crew for more help or enquiries other then their order. They are also able to feedback the crew/airplane at the end.</p>
+                    </div>
+                </div>
+            </div>
+    </body>
+</html>

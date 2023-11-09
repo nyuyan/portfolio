@@ -12,13 +12,11 @@
         <p><strong>Message:</strong> <span id="message"></span></p>
 
         <script>
-            // Retrieve form data from localStorage and display it
             document.getElementById("firstName").textContent = localStorage.getItem("firstName");
             document.getElementById("lastName").textContent = localStorage.getItem("lastName");
             document.getElementById("country").textContent = localStorage.getItem("country");
             document.getElementById("message").textContent = localStorage.getItem("message");
 
-            // Clear localStorage after displaying the data
             localStorage.clear();
         </script>
     </body>

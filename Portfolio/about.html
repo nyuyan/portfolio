@@ -1,76 +1,900 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <style>
-            * {
-                box-sizing: border-box;
-            }
-
             body {
+                overflow-x: hidden;
                 background-color: #A5D2F2;
                 padding: 20px;
                 font-family: Arial;
             }
-
-            .main {
-                max-width: 1000px;
-                margin: auto;
-            }
-
             .navbar {
+                display: flex;
+                justify-content: flex-end;
                 overflow: hidden;
-                background-color: steelblue;
-                height: 80px; /* Set the height of the navigation bar */
+                max-width: 100%;
+                background-color: #fff;
+                padding: 0 20px;
+                border-radius: 40px;
+                box-shadow: 0 10px 40px rgba(159, 162, 177, .8);
             }
 
-            .navbar .logo {
-                float: left;
-                padding: 15px;
-            }
-
-            .navbar .navbar-right {
-                float: right;
-                line-height: 80px; /* Vertically center the text within the taller navigation bar */
-            }
-
-            .navbar a {
-                display: inline-block;
-                color: #f2f2f2;
-                text-align: center;
-                padding: 0 20px; /* Add padding to the navigation links */
+            .navbar-item {
+                color: #83818c;
+                padding: 20px;
                 text-decoration: none;
+                transition: .3s;
+                margin: 0 6px;
+                z-index: 1;
+                font-family: 'DM Sans', sans-serif;
+                font-weight: 500;
+                position: relative;
             }
 
-            .navbar a:hover {
-                background-color: #ddd;
-                color: black;
+            .navbar .navbar-item[data-active-color="orange"]:hover {
+                color: orange;
             }
+
+            .navbar .navbar-item[data-active-color="green"]:hover {
+                color: green;
+            }
+
+            .navbar .navbar-item[data-active-color="blue"]:hover {
+                color: blue;
+            }
+
+            .navbar .navbar-item[data-active-color="red"]:hover {
+                color: red;
+            }
+            .navbar .navbar-item[data-active-color="purple"]:hover{
+                color: purple;
+            }
+
+            .navbar-indicator {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 4px;
+                transition: .4s;
+                height: 5px;
+                z-index: 1;
+                border-radius: 8px 8px 0 0;
+            }
+
+            .navbar-item:before {
+                content: "";
+                position: absolute;
+                bottom: -6px;
+                left: 0;
+                width: 100%;
+                height: 5px;
+                background-color: #dfe2ea;
+                border-radius: 8px 8px 0 0;
+                opacity: 0;
+                transition: .3s;
+            }
+
+            .navbar-item:not(.is-active):hover:before {
+                opacity: 1;
+                bottom: 0;
+            }
+
+            @media (max-width: 580px) {
+                .navbar {
+                    overflow: auto;
+                }
+            }
+
             .about-me {
-                margin-top: 20px; /* Adjust the top margin as needed */
+                margin-top: 10px;
+                margin-left: 700px;
+            }
+            .about-text{
+                font-size: 30px;
+            }
+            .word{
+                font-size: 35px;
+                margin-left: -450px;
             }
 
             .bigger-text {
-                font-weight: bold;
-                font-size: 36px; /* You can adjust the font size as per your preference */
+                font-size: 60px;
+                margin-left: 10px;
             }
-        </style>
+
+            .image-container {
+                width: 800px;
+                height: 500px;
+                text-align: center;
+                margin-top: 0px;
+                background-color: darkcyan;
+                padding: 20px;
+                border-radius: 10px;
+                float: left;
+                margin-right: 20px;
+                margin-bottom: 20px;
+                perspective: 1000px;
+            }
+
+            .flip-card {
+                width: 800px;
+                height: 500px;
+                position: relative;
+                transform-style: preserve-3d;
+                transition: transform 0.5s;
+            }
+
+            .flip-card:hover .flip-card-inner {
+                transform: rotateY(180deg);
+            }
+
+            .flip-card-inner {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                position: relative;
+                transform-style: preserve-3d;
+                transition: transform 0.5s;
+            }
+
+            .flip-card-front, .flip-card-back {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                backface-visibility: hidden;
+            }
+
+            .flip-card-front {
+                background-color: darkcyan;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .flip-card-back {
+                background-color: skyblue;
+                transform: rotateY(180deg);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                font-size: 20px;
+            }
+
+            .about-text {
+                line-height: 50px;
+                font-size: 35px;
+            }
+
+
+            .do-container {
+                width: 1210px;
+                height: 450px;
+                background-color: skyblue;
+                border-radius: 10px;
+                margin-bottom: 90px;
+                clear: both;
+            }
+            .ach-container {
+                width: 550px;
+                height: 540px;
+                margin-bottom: 20px;
+                margin-right: 40px;
+                background-color: skyblue;
+                border-radius: 10px;
+                float: right;
+            }
+
+            .ach-container .next-btn,
+            .ach-container .prev-btn {
+                display: inline-block;
+                padding: 10px 25px;
+                background-color: #3498db;
+                color: white;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                margin: 10px;
+            }
+            .container {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                gap: 1em;
+                max-width: 100vw;
+                width: 100%;
+                padding: 20px;
+                box-sizing: border-box;
+                border-radius: 10px;
+                justify-content: flex-end;
+            }
+
+            .rect {
+                position: relative;
+                background-size: cover;
+                background-position: center center;
+                height: 600px;
+                width: 250px;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                color: black;
+                font-size: 20px;
+                text-transform: uppercase;
+                font-weight: bold;
+                letter-spacing: 2px;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+
+            .rect:before {
+                content: "";
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: pink;
+                height: 30px;
+                width: calc(100% - 40px); 
+                z-index: -1;
+            }
+
+            .rect:nth-child(1) { background-image: url('./image/ktv.jpg'); }
+            .rect:nth-child(2) { background-image: url('./image/dance.jpg'); }
+            .rect:nth-child(3) { background-image: url('./image/photo.jpg'); }
+            .rect:nth-child(4) { background-image: url('./image/art.jpg'); }
+            .rect:nth-child(5) { background-image: url('./image/music.jpg'); }
+            .rect:nth-child(6) { background-image: url('./image/diy.jpg'); }
+
+            .rect:hover {
+                filter: grayscale(40%) opacity(0.7);
+                transform: scale(0.8); 
+                padding: 10px;
+            }
+
+            .container:hover .rect:hover {
+                transform: scale(1);
+                z-index: 1;
+            }
+
+            .container:hover .rect:not(:hover) {
+                transform: scale(0.6);
+                margin-right: 0;
+            }
+
+            .button-container{
+                margin-top: -30px;
+                margin-left: 110px;
+            }
+            .box-container {
+                margin-left: 50px;
+                margin-top: -100px;
+                perspective: 4000px;
+            }
+            .box {
+                position: relative;
+                width: 200px;
+                height: 200px;
+                transform-style: preserve-3d;
+                transform: rotateY(0deg);
+                animation: rotate 20s linear infinite;
+                margin-left: -300px;
+                margin-top: 150px;
+                margin-bottom: 150px;
+            }
+            .box span {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                transform-origin: center;
+                transform-style: preserve-3d;
+                transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+            }
+            .box span img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .box span .text-box {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                color: white;
+                text-align: center;
+                padding: 10px;
+            }
+            @keyframes rotate {
+                100% {
+                    transform: rotateY(360deg);
+                }
+            }
+            .event {
+                position: relative;
+                margin-bottom: 50px;
+                display: flex;
+                align-items: flex-start;
+                transition: all 0.3s ease;
+            }
+
+            .event:hover {
+                transform: scale(1.05);
+            }
+
+            .event .circle,
+            .event .time,
+            .event .content {
+                transition: all 0.3s ease;
+            }
+
+            .event:hover .circle {
+                transform: scale(1);
+            }
+
+            .event:hover .time {
+                transform: scale(1);
+            }
+
+            .event:hover .content {
+                transform: scale(1);
+            }
+
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 50px 20px;
+                margin-left: 50px;
+            }
+
+            .timeline {
+                position: relative;
+                margin-top: 50px;
+                margin-left: -1050px;
+            }
+
+            .timeline:before {
+                content: '';
+                position: absolute;
+                left: 50%;
+                top: 0;
+                width: 2px;
+                height: 100%;
+                background: #3498db;
+                transform: translateX(-50%);
+            }
+
+            .event {
+                position: relative;
+                margin-bottom: 50px;
+                display: flex;
+                align-items: flex-start;
+                left: 150px;
+            }
+
+            .event .circle {
+                width: 20px;
+                height: 20px;
+                background-color: #3498db;
+                border-radius: 50%;
+                position: absolute;
+                left: 400px;
+                top: 20px;
+            }
+
+            .event .content {
+                background: lightpink;
+                color: black;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                margin-left: 80px;
+                position: relative;
+                margin-right:100px;
+                margin-bottom: 20px;
+            }
+
+            .event .time {
+                background: lightpink;
+                color: black;
+                padding: 10px 60px;
+                border-radius: 5px;
+                margin-left: 200px;
+                position: relative;
+                z-index: 1;
+            }
+            .container2{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                gap: 100px;
+                padding:20px;
+                transition: 0.5s;
+                transform: skewY(-10deg);
+                margin-left: -900px;
+                margin-top: 100px;
+            }
+            .card{
+                position: relative;
+                width: 200px;
+                height: 300px;
+                transition: 0.5s;
+                margin-bottom: 100px;
+            }
+            .card:before{
+                content: "";
+                position: absolute;
+                top:-15px;
+                left: 0;
+                width: 100%;
+                height:15px;
+                background: #7B8EC7;
+                transform-origin: bottom;
+                transform: skewX(45deg);
+                transition: 0.5s;
+            }
+            .card:after{
+                content: "";
+                position: absolute;
+                top:-15px;
+                left: -15px;
+                width: 15px;
+                height: 50%;
+                background: palevioletred;
+                transform-origin: left;
+                transform: skewY(45deg);
+                transition: 0.5s;
+                border-bottom: 200px solid #87CEEB;
+            }
+
+            .card:hover{
+                transform: translateY(-20px);
+            }
+            .imgBx{
+                position: relative;
+                width: 200px;
+                height: 100px;
+                background-color: plum;
+                background-image: linear-gradient(0deg, lightpink 0%, #B5FFFC 100%);
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+            .imgBx .fav{
+                font-size: 3em;
+            }
+            .imgBx .fa-html{
+                background-color: #7B8EC7;
+                background-image: linear-gradient(45deg, grey 0%, plum 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .imgBx .fa-css3-alt{
+                background-color: #7B8EC7;
+                background-image: linear-gradient(45deg, grey 0%, plum 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .imgBx .fa-js-square{
+                background-color: #7B8EC7;
+                background-image: linear-gradient(45deg, grey 0%, papayawhip 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .imgBx .fa-phyton{
+                background-color: #7B8EC7;
+                background-image: linear-gradient(45deg, grey 0%, papayawhip 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .imgBx h3{
+                position: relative;
+                margin-top: 10px;
+            }
+            .content{
+                position: relative;
+                background: pink;
+                width: 100%;
+                height: 300px;
+                padding: 20px;
+                text-align: center;
+
+            }
+
+            .content:before{
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 30px;
+                background: linear-gradient(transparent,transparent, rgba(0,0,0,0.2));
+                transform-origin: bottom;
+                transform: skewX(45deg);
+                transition: 0.5s;
+                z-index: -1;
+            }
+            .content p{
+                font-size: 13px;
+            }
+            .card:hover .content:before{
+                transform: translateY(40px) skewX(45deg);
+                filter:blur(5px);
+                opacity: 0.5;
+            }
+            .card:nth-child(1) {
+                z-index:3;
+            }
+            .card:nth-child(2) {
+                z-index: 2;
+            }
+            .card:nth-child(3){
+                z-index: 1;
+            }
+            h1{
+                margin-left: -250px;
+                font-size: 45px;
+                margin-top: 25px;
+                margin-bottom: 50px;
+
+            }
+            h4{
+                margin-left: -250px;
+                font-size: 45px;
+                margin-top: 105px;
+                margin-bottom:0px;
+
+            }
+            p1{
+                margin-left: 200px;
+                font-size: 55px;
+                margin-top: 130px;
+                margin-bottom: -50px;
+            }
+            .video-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                z-index: -1;
+            }
+
+            video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .logo{
+                margin-right: 900px;
+            }
+        </style>    
     </head>
     <body>
-        <div class="navbar">
-            <div class="logo">
-                <img src="path/to/your/logo.png" alt="Logo">
-            </div>
-            <div class="navbar-right">
-                <a href="#home">Home</a>
-                <a href="#projects">Projects</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </div>
+        <div class="video-container">
+            <video autoplay muted loop>
+                <source src="video/water3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="image/updatedlogo.png" height="50px"  width="50px" alt="Logo">
+            </div>
+            <a href="index2.html" class="navbar-item" data-active-color="orange">Home</a>
+            <a href="about.html" class="navbar-item is-active" data-active-color="green">About</a>
+            <a href="portfolio1.html" class="navbar-item" data-active-color="blue">Projects</a>
+            <a href="contact.html" class="navbar-item" data-active-color="red">Contact</a>
+            <a href="play3.html" class="navbar-item" data-active-color="purple">Play</a>
+            <span class="navbar-indicator"></span>
+        </nav>
         <div class="about-me">
-            <span>About</span>
+            <span class="about-text">About</span>
             <span class="bigger-text">ME</span>
         </div>
+
+        <div class="image-container">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="image/about2.jpg" alt="Your Image" style="max-width: 100%; max-height: 100%;">
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>Short Explanation About Me</h3>
+                        <p>Hello, I'm YuYan, a driven UI/UX designer, app and website developer, and coder. My fascination with technology's transformative power and love for design aesthetics led me to create meaningful digital experiences that inspire and connect people. 
+                            Continuously seeking growth and pushing boundaries, I aspire to shape the future through design and coding's power, creating extraordinary digital experiences that leave a lasting impact on users and society alongside potential employers and collaborators.  I approach every project with utmost dedication, constantly pushing my limits to be innovative and deliver what the audience desires. Building meaningful connections with design and development is my goal. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ach-container">
+            <div class="flip-cards-wrapper">
+                <div class="flip-card">
+                    <p>To Know More About What I Can Do</p>
+                    <img src="image/question.jpg" alt="Question" width="550px" height="370px">
+                    <p>Feel Free To Click On Next Button And Explore</p>
+                </div>
+                <div class="flip-card">
+                    <h2>Game Making/VR Making</h2>
+                    <img src="image/pic1.jpg" alt="VR/Game Making" width="550px" height="300px">
+                    <p>Passionate in specializing in creating
+                        immersive experiences. Expert in<br> cutting-edge technologies,
+                        I design captivating games that redefine interactive<br> entertainment.
+                        Committed to delivering exceptional user experiences <br> through a blend
+                        of technical expertise and creative design.</p>
+                </div>
+                <div class="flip-card">
+                    <h2>UI/UX Making</h2>
+                    <img src="image/ui.jpg" alt="UI.UX" width="550px" height="300px">
+                    <p>Dedicated UI/UX designer with a focus on creating seamless, user-centric<br>
+                        interfaces. Skilled in crafting visually appealing designs and intuitive<br>
+                        user experiences. Committed to enhancing user satisfaction by combining<br> creativity,
+                        research, and technical proficiency to deliver exceptional digital<br> products.</p>
+                </div>
+                <div class="flip-card">
+                    <h2>Website Development</h2>
+                    <img src="image/web.png" alt="web" width="550px" height="320px">
+                    <p>Seasoned web application developer proficient in creating responsive and<br>
+                        user-friendly digital solutions. Expert in both front-end and back-end<br>
+                        technologies, I deliver high-quality, innovative web applications that<br>
+                        prioritize user experience and business goals.</p>
+                </div>
+                <div class="flip-card">
+                    <h2>App Development</h2>
+                    <img src="image/app.png" alt="app" width="250px" height="330px">
+                    <img src="image/app2.png" alt="app2" width="250px" height="330px">
+                    <p>Proficient app developer specializing in high-performance, user-friendly<br>
+                        mobile applications. Skilled in diverse platforms and technologies, I <br>
+                        focus on creating innovative and intuitive apps. Dedicated to seamless user<br>
+                        experiences, I prioritize client satisfaction through efficient coding and creative<br> solutions.</p>
+                </div>
+                <div class="flip-card">
+                    <h2>Skectching</h2>
+                    <img src="image/sketch.jpg" alt="sketch" width="550px" height="320px">
+                    <p>Creative sketch artist skilled in capturing emotions and concepts through<br>
+                        expressive visuals. Proficient in various styles, I craft compelling<br>
+                        sketches that resonate with viewers. Passionate about visual storytelling,<br>
+                        I bring ideas to life with creativity and precision.</p>
+                </div>
+                <div class="flip-card">
+                    <h2>Coding</h2>
+                    <img src="image/code.png" alt="code" width="550px" height="320px">
+                    <p>Passionate coder skilled in multiple languages, focusing on efficient,<br>
+                        user-friendly solutions. Committed to continuous learning and collaboration,<br>
+                        I thrive on transforming complex ideas into innovative applications.</p>
+                </div>
+                <div class="flip-card">
+                    <h2>Language/Volunteer</h2>
+                    <img src="image/lang.jpg" alt="lang/vol" width="500px" height="320px">
+                    <p>Able talk in English, Chinese, and Hokkien, I am a versatile professional<br>
+                        who actively volunteers in community center events. My portfolio reflects<br>
+                        expertise in coding, app development, creative sketching, and immersive VR<br>
+                        experiences. Passionate about bridging cultural gaps, I bring a unique<br>
+                        perspective and collaborative spirit to every project.</p>
+                </div>
+                <!-- Add more cards as needed -->
+
+                <div class="button-container">
+                    <button class="prev-btn" onclick="showAchievement(-1)">Previous</button>
+                    <button class="next-btn" onclick="showAchievement(1)">Next</button>
+                </div>
+
+                <h1>Personality</h1>
+                <div class="box-container">
+                    <div class="box" id="imageBox">
+                        <span style="--i:1;">
+                            <img src="image/mepic2.jpg" alt="">
+                            <div class="text-box">Teamwork</div>
+                        </span>
+                        <span style="--i:2;">
+                            <img src="image/mepic2.jpg" alt="">
+                            <div class="text-box">Diligent</div>
+                        </span>
+                        <span style="--i:3;">
+                            <img src="image/mepic2.jpg" alt="">
+                            <div class="text-box">On Time</div>
+                        </span>
+                        <span style="--i:4;">
+                            <img src="image/mepic2.jpg" alt="">
+                            <div class="text-box">Responsible</div>
+                        </span>
+                        <span style="--i:5;">
+                            <img src="image/mepic2.jpg" alt="">
+                            <div class="text-box">Integrity</div>
+                        </span>
+                        <span style="--i:6;">
+                            <img src="image/mepic2.jpg" alt="">
+                            <div class="text-box">Detailed</div>
+                        </span>
+                        <span style="--i:7;">
+                            <img src="image/mepic2.jpg" alt="">
+                            <div class="text-box">Observant</div>
+                        </span>
+                        <span style="--i:7;">
+                            <img src="image/mepic2.jpg" alt="">
+                            <div class="text-box">Quality</div>
+                        </span>
+                    </div>
+                </div>
+
+                <h1>Skills I Know</h1>
+                <div class="container2">
+                    <div class="card">
+                        <div class="imgBx">
+                            <h3>HTML</h3>
+                        </div>
+                        <div class="content">
+                            <p><i class="fab fa-html5"></i>
+                            <p>I am proficient in HTML, the standard markup language that I use to structure content on web pages. It enables me to display text, images, links, forms, and other elements in web browsers effectively.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="imgBx">
+                            <h3>CSS</h3>
+                        </div>
+                        <div class="content">
+                            <p><i class="fab fa-css3-alt"></i></p>
+                            <p>I have expertise in CSS, a stylesheet language that I utilize to enhance the visual appeal of web pages. With CSS, I control layouts, formatting, and the overall appearance of elements, creating a seamless user experience.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="imgBx">
+                            <h3>JavaScript</h3>
+                        </div>
+                        <div class="content">
+                            <p><i class="fab fa-js"></i></p>
+                            <p>I have strong skills in JavaScript, a programming language that I employ to create interactive and dynamic features on websites. It enables me to enhance user engagement by developing responsive and interactive web applications.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="imgBx">
+                            <h3>Python</h3>
+                        </div>
+                        <div class="content">
+                            <p><i class="fab fa-python"></i></p>
+                            <p>I am proficient in Python, a versatile and user-friendly programming language. I use Python for various applications, including web development, due to its readability and ease of use.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="imgBx">
+                            <h3>Adobe XD</h3>
+                        </div>
+                        <div class="content">
+                            <p><i class="fab fa-adobe"></i></p>
+                            <p>I use Adobe XD, a powerful design and prototyping tool, to create intuitive user experiences and interactive interfaces for websites and digital products.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="imgBx">
+                            <h3>Adobe Photoshop</h3>
+                        </div>
+                        <div class="content">
+                            <p><i class="fab fa-adobe"></i></p>
+                            <p>I am skilled in Adobe Photoshop, a graphic design software that I use to edit, manipulate, and optimize images for web use. It allows me to create visually appealing and optimized graphics for websites.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="imgBx">
+                            <h3>Adobe Illustrator</h3>
+                        </div>
+                        <div class="content">
+                            <p><i class="fab fa-adobe"></i></p>
+                            <p>I utilize Adobe Illustrator, a vector graphics editor, to create scalable and high-quality illustrations, logos, and other graphic elements for web design projects.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="imgBx">
+                            <h3>Adobe ID</h3>
+                        </div>
+                        <div class="content">
+                            <p><i class="fab fa-adobe"></i></p>
+                            <p>I use Adobe InDesign, a desktop publishing software, to design layouts and documents, including those intended for web distribution. It helps me create visually appealing content for online platforms./p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="imgBx">
+                            <h3>WIX/Figma</h3>
+                        </div>
+                        <div class="content">
+                            <p><i class="fab fa-wix"></i> / <i class="fab fa-figma"></i></p>
+
+                            <p>I am experienced in using Wix, a user-friendly website builder, and Figma, a collaborative interface design tool. These platforms enable me to create and prototype websites efficiently, allowing for seamless collaboration and design iteration.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="imgBx">
+                            <h3>Java & C sharp</h3>
+                        </div>
+                        <div class="content">
+                            <p><i class="fab fa-java"></i></p>
+                            <p>I have programming expertise in Java and C#. I use Java for building robust web applications, leveraging its versatility and scalability. Additionally, I use C# for developing Windows applications and web services, ensuring a seamless user experience across different platforms.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h4><b>Timeline</b></h4>
+                <div class="container">
+                    <div class="timeline">
+                        <div class="event">
+                            <div class="circle"></div>
+                            <div class="time">2012-2017</div>
+                            <div class="content">
+                                <h3>Chij Katong Primary Convent</h3>
+                                <img src="image/chij.jpg" alt="Chij Katong Primary Convent Image" width="500px" height="150px">
+                                <p>There was a event on going in school, a group of presenter came to our school to showcase a skit which is related to coding.</p>
+                            </div>
+                        </div>
+                        <div class="event">
+                            <div class="circle"></div>
+                            <div class="time">2018-2021</div>
+                            <div class="content">
+                                <h3>Manjusri Secondary School</h3>
+                                <img src="image/mjr.jpg" alt="Manjusri Image" width="500px" height="150px">
+                                <p>Took DNT and did some sketches. From then I started liking sketching and slowly interested in design and wanting to create.</p>
+                            </div>
+                        </div>
+                        <div class="event">
+                            <div class="circle"></div>
+                            <div class="time">2022-2025</div>
+                            <div class="content">
+                                <h3>Republic Polytechnic</h3>
+                                <img src="image/rp.jpg" alt="Republic Polytechnic Image" width="500px" height="100px">
+                                <P>Year 1:Common ICT  Learnt: ECG I: Future of Work, Communication in Global Workplace, Critical Thinking and Problem Solving
+                                    , Singapore, World and I, Mathematics, IT in Business Processes, Programming Fundamentals I.<br>
+                                    Year 1 Sem2, Year 2, Year 3: Digital Design Development Diploma    Learnt: Innovation and Practice, ECG II: Future-Ready
+                                    , Software Development Process, Database Systems,Computer System Technologies, IT Security and Management
+                                    , Software Application Development, UI/UX Design for Apps, Web App Development, Immersive Technologies
+                                    , AI and Machine Learning, Software Testing and Analytics, Mobile App Development, Business Intelligence, Fundamentals of Design</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="word">
+                <p1><b>Interest</b></p1>
+            </div>
+            <div class="container">
+                <div class="rect">Singing</div>
+                <div class="rect">Dancing</div>
+                <div class="rect">Photography</div>
+                <div class="rect">Design/Create</div>
+                <div class="rect">Music</div>
+                <div class="rect">DIY</div>
+            </div>
+
+            <script>
+                // JavaScript for card navigation
+                let currentCard = 0;
+                const cards = document.querySelectorAll('.ach-container .flip-card');
+
+                function showAchievement(step) {
+                    currentCard += step;
+
+                    if (currentCard < 0) {
+                        currentCard = 0;
+                    } else if (currentCard >= cards.length) {
+                        currentCard = cards.length - 1;
+                    }
+
+                    cards.forEach((card, index) => {
+                        if (index === currentCard) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                }
+
+                showAchievement(0)
+
+            </script>
     </body>
 </html>
