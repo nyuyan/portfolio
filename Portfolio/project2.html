@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <title>Your Project Portfolio</title>
         <style>
             body {
-                font-family: Arial, sans-serif;
+                font-family: 'Arial', sans-serif;
                 margin: 0;
                 padding: 0;
-                background-color: skyblue;
             }
-
+            .h6{
+                font-family: 'Poppins', sans-serif;
+            }
+            .p{
+                font-family: 'Monsterrat', sans-serif;
+            }
             .navbar {
                 display: flex;
                 justify-content: flex-end;
@@ -17,7 +27,6 @@
                 background-color: #fff;
                 padding: 0 20px;
                 border-radius: 40px;
-                box-shadow: 0 10px 40px rgba(159, 162, 177, .8);
                 z-index: 2;
                 margin-top: 10px;
             }
@@ -81,203 +90,100 @@
                 opacity: 1;
                 bottom: 0;
             }
-
-            .container {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-around;
-                margin-top: 5px;
-                margin-left: 20px;
-            }
-
-            .card {
-                position: relative;
-                height: 28rem;
-                width: 30rem;
-                perspective: 1000px;
-                cursor: pointer;
-                margin: 0 50px 300px;
-                transition: transform 0.5s;
-            }
-
-            .card .shadow {
-                position: absolute;
-                inset: 0;
-                box-shadow: 0 -1.5rem 2rem -0.5rem rgba(0, 0, 0, 0.7);
-                transform: translateZ(-1rem);
-                width: 100%;
-                height: 100%;
-            }
-
-            .card .shadow img {
-                width: 100%;
-                height: 100%;
-            }
-
-            .card .content {
-                position: absolute;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-                inset: 0;
-                padding: 3.5rem;
-                color: black;
-                text-align: center;
-                margin-bottom: -300px;
-            }
-
-            h2 {
-                font-size: 1.25rem;
-                font-weight: 700;
-                margin-bottom: 0.5rem;
-                text-shadow: 0 0 2rem rgba(0, 0, 0, 0.5);
-            }
-
-            p {
-                font-weight: 300;
-                text-shadow: 0 0 2rem rgba(0, 0, 0, 0.5);
-            }
-
-            .card:hover {
-                transform: rotateX(calc(var(--rotateX) * 1deg)) rotateY(calc(var(--rotateY) * 1deg));
-            }
-
-            .card:hover .shadow {
-                transform: translateZ(10rem);
-            }
-
-            .card:nth-child(1) {
-                --rotateX: -20;
-                --rotateY: 20;
-            }
-
-            .card:nth-child(2) {
-                --rotateX: 20;
-                --rotateY: -20;
-            }
-
-            .card:nth-child(3) {
-                --rotateX: 20;
-                --rotateY: 20;
-            }
-            .card:nth-child(4) {
-                --rotateX: 20;
-                --rotateY: 20;
-            }
-            .card:nth-child(5) {
-                --rotateX: 20;
-                --rotateY: 20;
-            }
-            .card:nth-child(6) {
-                --rotateX: 20;
-                --rotateY: 20;
-            }
-            .card:nth-child(7) {
-                --rotateX: 20;
-                --rotateY: 20;
-            }
-            .card:nth-child(8) {
-                --rotateX: 20;
-                --rotateY: 20;
-            }
-            .card:nth-child(9) {
-                --rotateX: 20;
-                --rotateY: 20;
-            }
-            .video-container {
-                flex: 1;
-                position: relative;
-                width: 100px;
-                height: 500px;
-                background-color: black;
-                margin-top: 50px;
-                margin-bottom: 50px;
-                margin-right:  80px;
-            }
-
-
-
-            .image-container {
-                flex: 1;
-                text-align: center;
-                margin-top: 50px;
-                margin-bottom: 50px;
-            }
-
-            .flip-card {
-                width: 700px;
-                height: 500px;
-                perspective: 1000px;
-            }
-
-            .flip-card-inner {
-                width: 100%;
-                height: 100%;
-                text-align: center;
-                position: relative;
-                transform-style: preserve-3d;
-                transition: transform 0.5s;
-            }
-
-            .flip-card:hover .flip-card-inner {
-                transform: rotateY(180deg);
-            }
-
-            .flip-card-front, .flip-card-back {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                backface-visibility: hidden;
-            }
-
-            .flip-card-front {
-                background-color: skyblue;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .flip-card-back {
-                background-color: #e74c3c;
-                transform: rotateY(180deg);
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                font-size: 20px;
-            }
-            .textbox {
-                width: 600px;
-                padding: 20px;
-                text-align: left;
-                border-radius: 10px;
-                font-size: 25px;
-                margin-left: -200px;
-            }
-
-            .container {
-                display: flex;
-                justify-content: space-around;
-                margin-top: 5px;
-            }
-
-            .image-container,
-            .video-container {
-                flex: 1;
-                text-align: center;
-                margin-top: 0px;
-                margin-bottom: 80px;
-            }
-
-            video {
-                width: 100%;
-                height: 100%;
-            }
             .logo{
                 margin-right: 900px;
             }
 
+            header {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                padding: 20px;
+                height: 100px;
+            }
+
+            .project {
+                max-width: 1500px;
+                margin: 20px auto;
+                padding: 20px;
+                background-color: #9DC8E6;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .main-image {
+                flex: 1;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .main-image img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .video-container {
+                flex: 1;
+                margin-left: 20px;
+                margin-top: 50px;/* Add margin to separate the image and video */
+            }
+
+            .video-container iframe {
+                width: 100%;
+                height: 100%;
+            }
+
+            footer {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                padding: 10px;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            }
+
+
+            .carousel-control-next, .carousel-control-prev {
+                filter: invert(100%);
+                width: 3%;
+            }
+
+
+            .footer-links a {
+                color: #666;
+                text-decoration: none;
+                margin-left: 1rem;
+            }
+
+            .footer-links a:hover, .text-orange {
+                color: #ff5805;
+            }
+            .footer-links, .footer-copyright {
+                float: none !important;
+                width: 100%;
+                text-align: center;
+                clear: both;
+            }
+            .footer-links {
+                margin-top: 0.5rem;
+            }
+            .footer-links a {
+                margin-left: 0.5rem;
+                margin-right: 0.5rem;
+            }
+            .offcanvas-bottom{
+                height: 100px;
+            }
+            .sitemap{
+                margin-top: 50px;
+            }
+            .text{
+                margin-left: 950px;
+                margin-top: -300px;
+                padding-bottom: 150px;
+            }
         </style>
     </head>
     <body>
@@ -292,143 +198,281 @@
             <a href="play3.html" class="navbar-item" data-active-color="purple">Play</a>
             <span class="navbar-indicator"></span>
         </nav>
-        <div class="container">
-            <div class="textbox">
-                <a href="portfolio1.html">
-                    <p>< BACK TO PORTFOLIO</p>
-                </a>
-                <h2>Project 1</h2>
-                <p>Hover The Image To Know More About This Project</p>
+
+        <header style="display: flex; justify-content: space-between; align-items: center; background-color: #333; color: #fff; padding: 20px;">
+             <a href="project1.html" onclick="navigate('previous')" style="font-size: 24px; color: white;">&lt;</a>
+            <div>
+                <h1 style="margin: 0;">Pro Pay</h1>
+                <p style="margin: 0;">Mobile App</p>
             </div>
-            <div class="textbox">
-                <a href="project10.html">
-                    <p>Next Project ></p>
-                </a>
-                <h2>Video</h2>
-                <p>Click on the video, to view how this project work fully</p>
+            <a href="project3.html" onclick="navigate('next')" style="font-size: 24px; color: white;">&gt;</a>
+        </header>
+
+
+
+
+        <section class="project">
+            <h2>ProPay</h2>
+
+            <div class="main-image">
+                <img src="image/propay.jpg" alt="Your Image" style="max-width: 100%; max-height: 100%;">
             </div>
-        </div>
-        <div class="container">
-            <div class="image-container">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="image/propay.jpg" alt="Your Image" style="max-width: 100%; max-height: 100%;">
-                        </div>
-                        <div class="flip-card-back">
-                            <h2>About Project</h2>
-                            <p><b>Project done by: Adobe XD</b><br>
-                                <b>Method: Mobile App.</b><br>My app aims to empower older individuals by equipping them with the necessary knowledge and skills to utilize online confidently and effectively and card payments when making purchases. Users will acquire knowledge about online and card payments, including terminology and security measures, boosting their self-assurance. Users will autonomously perform real-life payments, confidently interacting with interfaces and successfully completing transactions using online and card methods. </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="video-container">
-                <video autoplay muted loop>
-                    <source src="video/propay1.mp4" type="video/mp4">
+                <video width="560" height="315" controls>
+                    <source src="video/propay.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
-            <div class="container">
-                <div class="card">
-                    <div class="shadow">
-                        <img src="image/sitemap1.jpg" alt="Card 1">
-                    </div>
-                    <div class="content">
-                        <h2>Sitemap</h2>
-                        <p>We decided to create 3 sections. It include Practice, Real life , About Us<br>
+
+            <div class="description">
+                <h6 class="h6">My app aims to empower older individuals by equipping them with the necessary knowledge and skills to utilize online confidently and effectively and card payments when making purchases. Users will acquire knowledge about online and card payments, including terminology and security measures, boosting their self-assurance. Users will autonomously perform real-life payments, confidently interacting with interfaces and successfully completing transactions using online and card methods. </h6>
+            </div>
+
+            <div class="sitemap">
+                <img src="image/sitemap1.jpg" height="300px" width="800px">
+                <div class="text">
+                    <p>We decided to create 3 sections. It include Practice, Real life , About Us<br>
                             Under which Practice include learn QR code, Paywave payment,etc. Real life section get to know how use in real life situation, for example
                         QR security check, ways to the nearest bank. Lastly, about us, contain the information and contact details.</p>
-                    </div>
                 </div>
-                <div class="card">
-                    <div class="shadow">
-                        <img src="image/color.png" alt="Card 2">
-                    </div>
-                    <div class="content">
-                        <h2>Color Scheme</h2>
-                        <p>The official colour of ProPay, a company, is a strong and sophisticated shade of blue that
+            </div>
+            <div class="sitemap">
+                <img src="image/color.png" height="400px" width="600px">
+                <div class="text">
+                    <p>The official colour of ProPay, a company, is a strong and sophisticated shade of blue that
                             symbolizes confidence, dependability, and the contemporary nature of digital transactions.
-                            To create an appealing visual harmony, the company app utilizes a complementary colour scheme 
-                            by combining corporate blue with a lively and enthusiastic accent colour. The chosen accent colour 
+                           The chosen accent colour 
                             is a vibrant orange that injects a sense of energy and directs focus toward significant elements 
-                            within the app. </p>
-                    </div>
+                            within the app.Scoot's UI features energetic colors (orange, yellow, and blue) reflecting their adventurous
+                            brand. Design principles of balance, unity, proximity, and emphasis create a cohesive, engaging,
+                            and intuitive interface, enhancing the in-flight shopping experience.</p>
                 </div>
-                <div class="card">
-                    <div class="shadow">
-                        <img src="image/font3.jpg" alt="Card 3">
-                    </div>
-                    <div class="content">
-                        <h2>Typography</h2>
-                        <p>Incorporating Gotham Bold font(For header or title/important word) in my app, I can create a visually 
+            </div>
+            <div class="sitemap">
+                <img src="image/font3.jpg" height="300px" width="900px">
+                <div class="text">
+                    <p>Incorporating Gotham Bold font(For header or title/important word) in my app, I can create a visually 
                             impactful and professional look. Its bold and commanding presence helps establish a clear visual 
                             hierarchy, while its versatility and recognition add credibility. Maintain brand consistency and 
                             balance with complementary fonts for a cohesive and engaging design which is very helpful and stands
                             out for my app. </p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="shadow">
-                        <img src="image/nav4.jpg" alt="Card 3">
-                    </div>
-                    <div class="content">
-                        <h2>Bottom Navigation</h2>
-                        <p>This will not take up so much space, and there is animation when hover for interactivity, there will be a darker blue on which webpage u are
-                        on. When user scroll down , there navigation is stay still, so no matter what, user will see it.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="shadow">
-                        <img src="image/tutorial.jpg" alt="Card 3">
-                    </div>
-                    <div class="content">
-                        <h2>Tutorial Package</h2>
-                        <p>This is where by user get to understand more about how to use QR PAYMENT method, so there will be step by step tutorial and
-                        teach them slowly. There is 3 different learning package, user can choose any, there is learn QR code, Paywave payemnt and Payment security</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="shadow">
-                        <img src="image/quiz.jpg" alt="Card 3">
-                    </div>
-                    <div class="content">
-                        <h2>Quiz</h2>
-                        <p>So after every tutorial package, there will be quiz question to let user answer, unlimited tries till you get right.
-                        This is to ensure , user understand the steps and knowledge fully.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="shadow">
-                        <img src="image/sign.jpg" alt="Card 3">
-                    </div>
-                    <div class="content">
-                        <h2>Login/SignUp</h2>
-                        <p>User have to sign up and login. To make sure everyone have a secure and privacy learning and experience using online payment.
-                           This is also to allow us to easier know your information when something happen.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="shadow">
-                        <img src="image/guide.jpg" alt="Card 3">
-                    </div>
-                    <div class="content">
-                        <h2>Guide to bank</h2>
-                        <p>After tutorial, quiz and all. User are able to experience real life situation. User can choose any in any timing, so there
-                        is direction to the bank, QR code check and the payment method to use best for each situation. For this picture, it
-                        shows steps by steps direction to let user get to the nearest bank, there is arrow and wordins for them to understand better.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="shadow">
-                        <img src="image/contact.jpg" alt="Card 3">
-                    </div>
-                    <div class="content">
-                        <h2>Contact </h2>
-                        <p>User get to go about us page, and choose whether to know more about the company branding and history, or
-                        they can contact us via those information given , and our scoial medias.</p>
-                    </div>
                 </div>
             </div>
+
+
+            <div class="container-lg featured-courses">
+                <div class="row mt-5 mb-3 text-dark-grey">
+                    <h3>Featured Functions</h3>
+                </div>
+                <div id="carouselCourses" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner pb-2 text-dark-grey">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm card1">
+                                        <a href="#"><img src="image/nav4.jpg" class="card-img-top" height="300px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">Bottom Navigation</h5>
+                                            <p class="card-text small">This will not take up so much space, and there is animation when hover for interactivity, there will be a darker blue on which webpage u are
+                        on. When user scroll down , there navigation is stay still, so no matter what, user will see it. </p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan
+                                            <a class="card-bookmark1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button">
+                                                <i class="far fa-heart float-end mt-1 text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="Add to Likes"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm card2">
+                                        <a href="#"><img src="image/tutorial.jpg" class="card-img-top" height="300px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">Tutorial Package</h5>
+                                            <p class="card-text small">This is where by user get to understand more about how to use QR PAYMENT method, so there will be step by step tutorial and
+                        teach them slowly. There is 3 learning package,there is learn QR code, Paywave payemnt and Payment security.</p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan
+                                            <a class="card-bookmark2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button">
+                                                <i class="far fa-heart float-end mt-1 text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="Add to Likes"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm card3">
+                                        <a href="#"><img src="image/quiz.jpg" class="card-img-top" height="300px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">Quiz</h5>
+                                            <p class="card-text small">So after every tutorial package, there will be quiz question to let user answer, unlimited tries till you get right.
+                        This is to ensure , user understand the steps and knowledge fully. Once see a tick means the user have successfully passed the quiz.</p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan
+                                            <a class="card-bookmark3" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button">
+                                                <i class="far fa-heart float-end mt-1 text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="Add to Likes"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm card4">
+                                        <a href="#"><img src="image/sign.jpg" class="card-img-top" height="300px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">Login/SignUp</h5>
+                                            <p class="card-text small">User have to sign up and login. To make sure everyone have a secure and privacy learning and experience using online payment.
+                           This is also to allow us to easier know your information when something happen.</p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan
+                                            <a class="card-bookmark4" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button">
+                                                <i class="far fa-heart float-end mt-1 text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="Add to Likes"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm">
+                                        <a href="#"><img src="image/guide.jpg" class="card-img-top" height="300px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">Guide to Bank</h5>
+                                            <p class="card-text small">User able to experience real life situation. User get to try activities like
+                        the direction to the bank, QR code check and the payment method to use best for each situation. The direction tryout will have arrow and wordings for them to understand.</p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan<a href="#"><i
+                                                    class="far fa-heart float-end mt-1 text-secondary"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
+                                                    title="Add to Likes"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm">
+                                        <a href="#"><img src="image/contact.jpg" class="card-img-top" height="300px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">Contact</h5>
+                                            <p class="card-text small">User get to go about us page, and choose whether to know more about the company branding and history, or
+                        they can contact us via those information given , and our social medias. They are able to be directly to the social media they want to. </p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan<a href="#"><i
+                                                    class="far fa-heart float-end mt-1 text-secondary"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
+                                                    title="Add to Likes"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm">
+                                        <a href="#"><img src="image/ham.jpg" class="card-img-top" height="300px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">Hamburger Navigation</h5>
+                                            <p class="card-text small">Hamburger navigation saves screen space, offering a clean and intuitive interface. Users
+                                                can access menu options easily with a single tap, ensuring a seamless and clutter-free mobile app experience. It is being categorized and organized.</p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan<a href="#"><i
+                                                    class="far fa-heart float-end mt-1 text-secondary"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
+                                                    title="Add to Likes"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm">
+                                        <a href="#"><img src="image/main.jpg" class="card-img-top" height="300px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">Main Menu></h5>
+                                            <p class="card-text small">This is to let user know how many sections we have under one navigation. For example: Real Life Scenario, there is 3 sections under it. Which includes QR Code Check, Head to nearest bank and which payment method to use.</p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan<a href="#"><i
+                                                    class="far fa-heart float-end mt-1 text-secondary"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
+                                                    title="Add to Likes"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCourses" data-bs-slide="prev"
+                            style="margin-left: -3rem;">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselCourses" data-bs-slide="next"
+                            style="margin-right: -3rem;">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+
+
+            <h3>Technologies Used</h3>
+
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Your Name. All Rights Reserved.</p>
+            <div class="float-end footer-links">
+                <a href="index2.html">Home</a>
+                <a href="about.html">About Me</a>
+                <a href="portfolio1.html">Projects</a>
+                <a href="contact.html">Contact</a>
+                <a href="play.html">Play</a>
+            </div>
+        </footer>
+
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasExample">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Added To Likes</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+            </div>
+        </div>
+
+
+        <script>
+
+            var projects = [
+                // Add the details of your projects here
+                // Each project can be an object with properties like name, image, video, description, etc.
+            ];
+
+            var currentIndex = 0;
+
+            function navigate(direction) {
+                if (direction === 'previous') {
+                    currentIndex = (currentIndex - 1 + projects.length) % projects.length;
+                } else if (direction === 'next') {
+                    currentIndex = (currentIndex + 1) % projects.length;
+                }
+
+                updateProjectDetails();
+            }
+
+            function updateProjectDetails() {
+                // Update the content of your project details based on the current index
+                // You can use projects[currentIndex] to get the details of the current project
+                // For example, projects[currentIndex].name, projects[currentIndex].image, etc.
+                // For now, we are just displaying a placeholder message in the console.
+                console.log("Displaying project details for:", projects[currentIndex].name);
+            }
+
+            // Initial update to display the first project
+            updateProjectDetails();
+        </script>
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <title>Your Project Portfolio</title>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            .h6{
+                font-family: 'Poppins', sans-serif;
+            }
+            .p{
+                font-family: 'Monsterrat', sans-serif;
+            }
+            .navbar {
+                display: flex;
+                justify-content: flex-end;
+                overflow: hidden;
+                max-width: 100%;
+                background-color: #fff;
+                padding: 0 20px;
+                border-radius: 40px;
+                z-index: 2;
+                margin-top: 10px;
+            }
+
+            .navbar-item {
+                color: #83818c;
+                padding: 20px;
+                text-decoration: none;
+                transition: .3s;
+                margin: 0 6px;
+                z-index: 1;
+                font-family: 'DM Sans', sans-serif;
+                font-weight: 500;
+                position: relative;
+            }
+
+            .navbar .navbar-item[data-active-color="orange"]:hover {
+                color: orange;
+            }
+
+            .navbar .navbar-item[data-active-color="green"]:hover {
+                color: green;
+            }
+
+            .navbar .navbar-item[data-active-color="blue"]:hover {
+                color: blue;
+            }
+
+            .navbar .navbar-item[data-active-color="red"]:hover {
+                color: red;
+            }
+            .navbar .navbar-item[data-active-color="purple"]:hover{
+                color: purple;
+            }
+
+            .navbar-indicator {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 4px;
+                transition: .4s;
+                height: 5px;
+                z-index: 1;
+                border-radius: 8px 8px 0 0;
+            }
+
+            .navbar-item:before {
+                content: "";
+                position: absolute;
+                bottom: -6px;
+                left: 0;
+                width: 100%;
+                height: 5px;
+                background-color: #dfe2ea;
+                border-radius: 8px 8px 0 0;
+                opacity: 0;
+                transition: .3s;
+            }
+
+            .navbar-item:not(.is-active):hover:before {
+                opacity: 1;
+                bottom: 0;
+            }
+            .logo{
+                margin-right: 900px;
+            }
+
+            header {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                padding: 20px;
+                height: 100px;
+            }
+
+            .project {
+                max-width: 1500px;
+                margin: 20px auto;
+                padding: 20px;
+                background-color: #9DC8E6;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .main-image {
+                flex: 1;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .main-image img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .video-container {
+                flex: 1;
+                margin-left: 20px;
+                margin-top: 50px;/* Add margin to separate the image and video */
+            }
+
+            .video-container iframe {
+                width: 100%;
+                height: 100%;
+            }
+
+            footer {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                padding: 10px;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            }
+
+
+            .carousel-control-next, .carousel-control-prev {
+                filter: invert(100%);
+                width: 3%;
+            }
+
+
+            .footer-links a {
+                color: #666;
+                text-decoration: none;
+                margin-left: 1rem;
+            }
+
+            .footer-links a:hover, .text-orange {
+                color: #ff5805;
+            }
+            .footer-links, .footer-copyright {
+                float: none !important;
+                width: 100%;
+                text-align: center;
+                clear: both;
+            }
+            .footer-links {
+                margin-top: 0.5rem;
+            }
+            .footer-links a {
+                margin-left: 0.5rem;
+                margin-right: 0.5rem;
+            }
+            .offcanvas-bottom{
+                height: 100px;
+            }
+            .sitemap{
+                margin-top: 50px;
+            }
+            .text{
+                margin-left: 950px;
+                margin-top: -300px;
+                padding-bottom: 150px;
+            }
+            .sitemap1{
+                margin-top: 150px;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="image/updatedlogo.png" height="50px"  width="50px" alt="Logo">
+            </div>
+            <a href="index2.html" class="navbar-item" data-active-color="orange">Home</a>
+            <a href="about.html" class="navbar-item" data-active-color="green">About</a>
+            <a href="portfolio1.html" class="navbar-item is-active" data-active-color="blue">Projects</a>
+            <a href="contact.html" class="navbar-item" data-active-color="red">Contact</a>
+            <a href="play3.html" class="navbar-item" data-active-color="purple">Play</a>
+            <span class="navbar-indicator"></span>
+        </nav>
+
+        <header style="display: flex; justify-content: space-between; align-items: center; background-color: #333; color: #fff; padding: 20px;">
+             <a href="project5.html" onclick="navigate('previous')" style="font-size: 24px; color: white;">&lt;</a>
+            <div>
+                <h1 style="margin: 0;">Portfolio</h1>
+                <p style="margin: 0;">Mobile App</p>
+            </div>
+            <a href="project7.html" onclick="navigate('next')" style="font-size: 24px; color: white;">&gt;</a>
+        </header>
+
+
+
+
+        <section class="project">
+            <h2>Portfolio</h2>
+
+            <div class="main-image">
+                <img src="image/portfolio.jpg" alt="Your Image" style="max-width: 100%; max-height: 100%;">
+            </div>
+
+            <div class="video-container">
+                <video width="560" height="315" controls>
+                    <source src="video/scoot.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="description">
+                <h6 class="h6">Skill Used: Low fidelity, logo design, prototype,animation, high fidelity. Anyone can see my portfolio app to understand more aboit
+me, they get to know more about me, portfolio and ways to contact me.</h6>
+            </div>
+
+            <div class="sitemap">
+                <img src="image/sitemap2.jpg" height="300px" width="900px">
+                <div class="text">
+                    <p>We decided to create 3 sections. About me will have 3 things, Portfolio will have 3 things and Contact will have 2.</p>
+                </div>
+            </div>
+            
+            <div class="sitemap1">
+                <img src="image/all.jpg" height="500px" width="900px">
+                <div class="text">
+                    <p>I will be using Analogous Colour Scheme. The colour palette used will be blue and green. The mixture of blue and green indicates professionalism and reliability, building trust with potential customers or employers. Analogous hues create an aesthetically appealing background without overpowering my work, allowing my portfolio's content to stand out. Blue and green are user-friendly colour options for my portfolio website since they are both aesthetically pleasing and provide accessibility and readability. Blue and green hues are so versatile, I may change the colour scheme to fit the various moods and styles of my portfolio items.
+                    Incorporating Abril Fatface font (Used this for words more important than normal wording) improves my portfolio by adding impact, distinctiveness, and visual hierarchy. With bold headings and readable body text.
+
+Utilizing the Poppins font(for normal wordings) in my portfolio website offers versatility, a contemporary and clean design, a friendly and approachable aesthetic, excellent readability, and consistent typography. These elements enhance the user experience, create a welcoming vibe, and ensure a polished and modern appearance for my portfolio website.
+ Incorporating Roboto font(For header or title/important word) in my portfolio website.</p>
+                </div>
+            </div>
+
+
+
+            <div class="container-lg featured-courses">
+                <div class="row mt-5 mb-3 text-dark-grey">
+                    <h3>Featured Functions</h3>
+                </div>
+                <div id="carouselCourses" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner pb-2 text-dark-grey">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm card1">
+                                        <a href="#"><img src="image/home.jpg" class="card-img-top" height="400px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">Home Page</h5>
+                                            <p class="card-text small">User will be able to tell that under the home page, this app is categories under 3 section, which is about me, contact and portfolios. </p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan
+                                            <a class="card-bookmark1" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button">
+                                                <i class="far fa-heart float-end mt-1 text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="Add to Likes"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm card2">
+                                        <a href="#"><img src="image/aboutme.jpg" class="card-img-top" height="300px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">Bottom Navigation</h5>
+                                            <p class="card-text small">This is stagnant navigation, so no matter the user scroll around, it will still be visible for the user
+                                                to use it. This is another navigation needed , so user can easily interact with it.</p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan
+                                            <a class="card-bookmark2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button">
+                                                <i class="far fa-heart float-end mt-1 text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="Add to Likes"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm card3">
+                                        <a href="#"><img src="image/sc1.jpg" class="card-img-top" height="300px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">Cart</h5>
+                                            <p class="card-text small">Able to add to cart and directly get the item/food.
+                                                Able to select their own flight too. Able to order via online, can pay online too and able to choose the quantity they want without meeting the staff face to face.</p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan
+                                            <a class="card-bookmark3" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button">
+                                                <i class="far fa-heart float-end mt-1 text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="Add to Likes"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm card4">
+                                        <a href="#"><img src="image/sc2.jpg" class="card-img-top" height="300px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">Login/SignUp</h5>
+                                            <p class="card-text small">User have to sign up and login. To make sure everyone who are access to this app is in the plane.
+                                                Is also to know which user from which seat order food or item. Only staff member do not need to do.</p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan
+                                            <a class="card-bookmark4" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button">
+                                                <i class="far fa-heart float-end mt-1 text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="Add to Likes"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm">
+                                        <a href="#"><img src="image/info.jpg" class="card-img-top" height="300px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">Safety Measures</h5>
+                                            <p class="card-text small">
+                                                They even get to know their specific time remainding before reaching destination.
+                                                Information for inflight, preflight and even tell you what user can do next time before flight.</p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan<a href="#"><i
+                                                    class="far fa-heart float-end mt-1 text-secondary"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
+                                                    title="Add to Likes"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm">
+                                        <a href="#"><img src="image/feed.jpg" class="card-img-top" height="300px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">Contact</h5>
+                                            <p class="card-text small">User get to contact our crew member. They get to contact crew for questions about their food or item order
+                                                Second option, will be just to contact crew for more help or enquiries other then their order.</p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan<a href="#"><i
+                                                    class="far fa-heart float-end mt-1 text-secondary"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
+                                                    title="Add to Likes"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm">
+                                        <a href="#"><img src="image/feedback.jpg" class="card-img-top" height="300px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">FeedBack</h5>
+                                            <p class="card-text small">User are able to give Feedback through the app, so we are able to understand more about our service review, and improve. User can complain and rate stars, give rating and services that need improve.</p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan<a href="#"><i
+                                                    class="far fa-heart float-end mt-1 text-secondary"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
+                                                    title="Add to Likes"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="card shadow-sm">
+                                        <a href="#"><img src="image/setting.jpg" class="card-img-top" height="300px"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-4 fs-6 fw-bold">Settings></h5>
+                                            <p class="card-text small">The setting is for the user to have an easier user experience whereby all functions is located there, user can find it and use it easily, it act as a navigation and user profile.</p>
+                                        </div>
+                                        <div class="card-footer small bg-white fs-small">
+                                            <i class="fas fa-user-circle me-2"></i>Yu Yan<a href="#"><i
+                                                    class="far fa-heart float-end mt-1 text-secondary"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true"
+                                                    title="Add to Likes"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselCourses" data-bs-slide="prev"
+                            style="margin-left: -3rem;">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselCourses" data-bs-slide="next"
+                            style="margin-right: -3rem;">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+
+
+            <h3>Technologies Used</h3>
+
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Your Name. All Rights Reserved.</p>
+            <div class="float-end footer-links">
+                <a href="index2.html">Home</a>
+                <a href="about.html">About Me</a>
+                <a href="portfolio1.html">Projects</a>
+                <a href="contact.html">Contact</a>
+                <a href="play.html">Play</a>
+            </div>
+        </footer>
+
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasExample">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Added To Likes</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+            </div>
+        </div>
+
+
+        <script>
+
+            var projects = [
+                // Add the details of your projects here
+                // Each project can be an object with properties like name, image, video, description, etc.
+            ];
+
+            var currentIndex = 0;
+
+            function navigate(direction) {
+                if (direction === 'previous') {
+                    currentIndex = (currentIndex - 1 + projects.length) % projects.length;
+                } else if (direction === 'next') {
+                    currentIndex = (currentIndex + 1) % projects.length;
+                }
+
+                updateProjectDetails();
+            }
+
+            function updateProjectDetails() {
+                // Update the content of your project details based on the current index
+                // You can use projects[currentIndex] to get the details of the current project
+                // For example, projects[currentIndex].name, projects[currentIndex].image, etc.
+                // For now, we are just displaying a placeholder message in the console.
+                console.log("Displaying project details for:", projects[currentIndex].name);
+            }
+
+            // Initial update to display the first project
+            updateProjectDetails();
+        </script>
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
